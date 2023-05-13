@@ -92,7 +92,7 @@ Then pass the encoded input to the model for making prediction/inference
 output = model(model_inputs)
 ```
 
-Learning more about tokenization in the [next blog on Tokenization](/_posts/2023-05-03-Tokenization.md)
+<!-- Learning more about tokenization in the [next blog on Tokenization](/_posts/2023-05-03-Tokenization.md) -->
 
 ## Reference
 [Hugging Face](https://huggingface.co/learn/nlp-course)

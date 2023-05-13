@@ -22,3 +22,4 @@ package-lock.json
 assets/js/dist
 assets/.DS_Store
 assets/img/.DS_Store
+.DS_Store
