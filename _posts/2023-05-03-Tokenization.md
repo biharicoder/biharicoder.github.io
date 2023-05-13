@@ -116,7 +116,7 @@ print(decoded_string)
 
 The `decode` method converts indices to tokens and also group them together to produce a meaningful sentence.
 
-Learning more about handling multiple sequences in the [next blog](/_posts/2023-05-03-Handling-multiple-sequences.md)
+<!-- Learning more about handling multiple sequences in the [next blog](/_posts/2023-05-03-Handling-multiple-sequences.md) -->
 
 ## Reference
 [Hugging Face](https://huggingface.co/learn/nlp-course)
