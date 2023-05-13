@@ -89,3 +89,6 @@ print(predictions)
 ```
 model.config.id2label
 ```
+
+## Reference
+[Hugging Face](https://huggingface.co/learn/nlp-course)
