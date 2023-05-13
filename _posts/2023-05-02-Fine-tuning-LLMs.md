@@ -68,9 +68,11 @@ The best but most computationally expensive method of fine-tuning is by updating
 ![different-types](/assets/img/2023-05-02-Fine-tuning-LLMs/different-types.png)
 
 
-## Creating dataset for fine-tuning LLM for Question Answering
+## Use-case: fine-tuning LLM for Question Answering
 
-### Summarization
+Let's consider the use case of building a Question answering system using LLM. In order to fine-tune a base generative model like Llama, FLAN-T5 etc., you need to first create a dataset with question, context and answers. The steps for creating such dataset are as follows:
+
+### Step1: Summarization
 Leverage summarization to create summary from the documents/passages
 1. Extract passages from documents
 ![html-passage](/assets/img/2023-05-02-Fine-tuning-LLMs/html-passage.png)
@@ -79,15 +81,19 @@ Leverage summarization to create summary from the documents/passages
 
 ![summary](/assets/img/2023-05-02-Fine-tuning-LLMs/summary.png)
 
-### Question Generation
+### Step2: Question Generation
 Use passage (context) and answer (summary) to create questions using `t5-small-question-generator` model. The model is designed to generate questions from a given context and answer, following a sequence-to-sequence approach. It takes the answer and context as input and produces the corresponding question as the output.
  
 ![question-generation](/assets/img/2023-05-02-Fine-tuning-LLMs/question-generation.png)
 
-### Finally Questions, context and answer pair
+### Step 3: Finally Questions, context and answer
 Convert the data (question, context and answer) into the format required for fine-tuning the BAM model
 
 ![bam-input-data-file](/assets/img/2023-05-02-Fine-tuning-LLMs/bam-input-data-file.png)
+
+Now these data points (question, context and answer) can be used to fine-tune any Large language model so that it can be used specifically for the purpose of Knowledge retrieval and question answering on specific domain/corpus/dataset.
+
+Stay tuned for the next blog on Knowledge Retrieval system using LLM.
 
 ## References:
 1. [Stanford AI lab](https://www.google.com/url?sa=i&url=http%3A%2F%2Fai.stanford.edu%2Fblog%2Fin-context-learning%2F&psig=AOvVaw1aS1lHam_Zq7kXK0zElafr&ust=1683079549131000&source=images&cd=vfe&ved=0CBIQjhxqFwoTCMDU_ZbI1f4CFQAAAAAdAAAAABAE)
