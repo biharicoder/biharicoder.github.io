@@ -6,6 +6,7 @@ layout: default
 
 <div class="row">
 
+  
   <!-- core -->
   <div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pr-xl-4">
     <div class="post pl-1 pr-1 pl-md-2 pr-md-2">
@@ -35,24 +36,41 @@ layout: default
   </div> <!-- #core-wrapper -->
 
   <!-- panel -->
+  
   <div id="panel-wrapper" class="col-xl-3 pl-2 text-muted">
+  
+    {% if page.layout != 'home' %}
+      <div class="access">
+        {% include pinned-sidebar.html %}
+        {% include disclaimer.html %}
+        
+      </div>
 
-    <div class="access">
-      {% if page.layout == 'home' %}
-        {% include update-list.html %}
-      {% endif %}
+      {% for _include in layout.panel_includes %}
+        {% assign _include_path = _include | append: '.html' %}
+        {% include {{ _include_path }} %}
+      {% endfor %}
+    {% endif %}
 
-      {% include disclaimer.html %}
+    <!-- niklas -->
+    {% if page.layout == 'home' %}
+      <div id="twitter-widget" style="margin-top:-18px">
+        <a class="twitter-timeline" 
+          data-border-color="#a80000" 
+          data-chrome="noheader, nofooter, noborders, transparent, noscrollbar" 
+          data-tweet-limit="5"
+          data-theme="light"
+          data-dnt="true"
+          href="https://twitter.com/nheidloff"></a> 
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
-
-    {% for _include in layout.panel_includes %}
-      {% assign _include_path = _include | append: '.html' %}
-      {% include {{ _include_path }} %}
-    {% endfor %}
-
-  </div>
+    {% endif %}
 
 </div>
+  
+
+</div>
+
 
 <!-- tail -->
 {% if layout.tail_includes %}
