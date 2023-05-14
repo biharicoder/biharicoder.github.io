@@ -1,4 +1,4 @@
-# Tuning LLMs
+# Exploring Techniques for Tuning Large Language Models (LLMs)
 
 As the field of artificial intelligence advances rapidly, it has become increasingly crucial to make the most of large language models (LLMs) in an efficient and effective manner. However, there are many different ways in which LLMs can be used, which can be daunting for beginners.
 
@@ -7,11 +7,11 @@ Basically, we can utilize pretrained LLMs for new tasks in two primary approache
 ## In-context learning
 Large language models (LLMs) that are trained on a general text corpus have the ability to learn in-context. This means that it is not necessary to further train or fine-tune the pretrained LLMs to perform specific or new tasks that were not explicitly trained on. Instead, by providing a few examples of the target task via the input prompt, the LLM can directly learn the task, as shown in the example below.
 
-!['In-context-classification](/assets/img/2023-05-02-Fine-tuning-LLMs/In-context-sentiment-classification.png)
+!['In-context-classification](/assets/img/2023-05-02-Tuning-LLMs/In-context-sentiment-classification.png)
 
 If we are using the model through an API, in-context learning can be particularly beneficial since we may not have direct access to the model.
 
-!['In-context-translation](/assets/img/2023-05-02-Fine-tuning-LLMs/In-context-translation.png)
+!['In-context-translation](/assets/img/2023-05-02-Tuning-LLMs/In-context-translation.png)
 
 ## Hard/Discrete prompt tuning
 
@@ -28,23 +28,23 @@ to
 Calculate the value of 15^2 / 5
 ```
 
-![hard-vs-soft](/assets/img/2023-05-02-Fine-tuning-LLMs/hard-vs-soft.png)
+![hard-vs-soft](/assets/img/2023-05-02-Tuning-LLMs/hard-vs-soft.png)
 
 The method of prompt tuning is a more cost-effective option compared to fine-tuning the model's parameters. However, its effectiveness is usually not as good as fine-tuning, since it does not update the model's parameters specifically for a given task, which may hinder its ability to adapt to unique characteristics of the task. Additionally, prompt tuning may require significant effort, as it frequently involves human participation in assessing and comparing the quality of different prompts.
 
 ## Soft prompt tuning
 Soft prompting is a technique of adding an adjustable input embedding to the primary input of the model and optimizing those embeddings. This method offers better outcomes compared to hard prompting, and it is comparable to complete model fine-tuning for natural language processing (NLP) tasks such as paraphrase detection and question-answering generation.
 
-![soft-prompting](/assets/img/2023-05-02-Fine-tuning-LLMs/soft-prompting.png)
+![soft-prompting](/assets/img/2023-05-02-Tuning-LLMs/soft-prompting.png)
 
 
 ## Indexing for IR (Converting into Embeddings)
 
 In the domain of large language models, indexing can be considered a way to use in-context learning to transform LLMs into retrieval systems that can extract information from external sources and websites. This involves using an indexing module to divide a document or website into smaller sections, converting them into vectors that can be stored in a vector database. When a user inputs a query, the indexing module computes the vector similarity between the query and each vector in the database, and returns the top k most similar vectors as the response.
 
-![indexing](/assets/img/2023-05-02-Fine-tuning-LLMs/indexing.png)
+![indexing](/assets/img/2023-05-02-Tuning-LLMs/indexing.png)
 
-![ir-llm-arch](/assets/img/2023-05-02-Fine-tuning-LLMs/ir-llm-arch.png)
+![ir-llm-arch](/assets/img/2023-05-02-Tuning-LLMs/ir-llm-arch.png)
 
 ## Fine-tuning
 
@@ -57,7 +57,7 @@ Fine-tuning could be of three types:
 
     In this method, we maintain the parameters of the pre-trained LLM as they are and only train the newly added output layers, similar to how we train a small multilayer perceptron or a logistic regression classifier on the embedded features.
 
-![bam-tuning](/assets/img/2023-05-02-Fine-tuning-LLMs/bam-tuning.png)
+![bam-tuning](/assets/img/2023-05-02-Tuning-LLMs/bam-tuning.png)
 
 3. **Updating all layers**
 The best but most computationally expensive method of fine-tuning is by updating all the layers of the model. The parameters of the pretrained LLMs are not frozen rather finetuned so it can be a computationally prohibitive solutions in LLMs.
@@ -65,7 +65,7 @@ The best but most computationally expensive method of fine-tuning is by updating
 
 ## Comparison of different tuning tasks
 
-![different-types](/assets/img/2023-05-02-Fine-tuning-LLMs/different-types.png)
+![different-types](/assets/img/2023-05-02-Tuning-LLMs/different-types.png)
 
 
 ## Use-case: fine-tuning LLM for Question Answering
@@ -75,21 +75,21 @@ Let's consider the use case of building a Question answering system using LLM. I
 ### Step1: Summarization
 Leverage summarization to create summary from the documents/passages
 1. Extract passages from documents
-![html-passage](/assets/img/2023-05-02-Fine-tuning-LLMs/html-passage.png)
+![html-passage](/assets/img/2023-05-02-Tuning-LLMs/html-passage.png)
 
 2. Summarize passage using FLAN-UL2 (BAM endpoint). The Flan-UL2 is a type of encoder-decoder model that follows the T5 architecture. To improve its performance, it was fine-tuned using a technique called "Flan" prompt tuning and a dataset collection.
 
-![summary](/assets/img/2023-05-02-Fine-tuning-LLMs/summary.png)
+![summary](/assets/img/2023-05-02-Tuning-LLMs/summary.png)
 
 ### Step2: Question Generation
 Use passage (context) and answer (summary) to create questions using `t5-small-question-generator` model. The model is designed to generate questions from a given context and answer, following a sequence-to-sequence approach. It takes the answer and context as input and produces the corresponding question as the output.
  
-![question-generation](/assets/img/2023-05-02-Fine-tuning-LLMs/question-generation.png)
+![question-generation](/assets/img/2023-05-02-Tuning-LLMs/question-generation.png)
 
 ### Step 3: Finally Questions, context and answer
 Convert the data (question, context and answer) into the format required for fine-tuning the BAM model
 
-![bam-input-data-file](/assets/img/2023-05-02-Fine-tuning-LLMs/bam-input-data-file.png)
+![bam-input-data-file](/assets/img/2023-05-02-Tuning-LLMs/bam-input-data-file.png)
 
 Now these data points (question, context and answer) can be used to fine-tune any Large language model so that it can be used specifically for the purpose of Knowledge retrieval and question answering on specific domain/corpus/dataset.
 
